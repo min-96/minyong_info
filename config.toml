@@ -1,0 +1,6 @@
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'minyong.read();'
+theme = 'hugo-book'
+[params]
+  BookTheme = 'dark'
