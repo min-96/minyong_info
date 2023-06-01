@@ -1,6 +1,10 @@
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
-title = 'minyong.read();'
+title =  ' minyong.write();'
 theme = 'hugo-book'
 [params]
-  BookTheme = 'dark'
+ # BookTheme = 'dark'
+  BookMenuBundle = '/menu'
+  BookLogo = 'logo.png'
+  BookRepo = 'https://github.com/min-96/minyong_info'
+  BookEditPath = 'edit/master/'
