@@ -1,10 +1,15 @@
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
-title =  ' minyong.write();'
+title =  ' minyong.read();'
 theme = 'hugo-book'
 [params]
  # BookTheme = 'dark'
   BookMenuBundle = '/menu'
   BookLogo = 'logo.png'
-  BookRepo = 'https://github.com/min-96/minyong_info'
-  BookEditPath = 'edit/master/'
+ # BookRepo = 'https://github.com/min-96/minyong_info'
+ # BookEditPath = 'edit/master/'
+
+
+[markup]
+[markup.goldmark.renderer]
+  unsafe = true
