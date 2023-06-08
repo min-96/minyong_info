@@ -109,8 +109,55 @@ public abstract class Pizza {
 
 }
 
-``` 
-    
+```
+각 파위 클래스의 빌더가 정의한 build메서드는 해당하는 구체 하위 클래스를 반환하도록 함    
+하위 클래스의 메서드가 상위 클래스의 메서드가 정의한 반환타입이 아닌, 그 하위 타입을 반환하는 기능을 **"공변반환타이핑"** 이라 한다.   
+이 기능을 이용하면 클라이언트가 형 변환에 신경쓰지 않고도 빌더를 사용할수있다.
+
+```java
+public static class ChicagoStylePizza extends Pizza {
+        private boolean hasSauce;
+
+        public static class Builder extends Pizza.Builder<Builder> {
+            private boolean hasSauce = false;
+
+            public Builder hasSauce() {
+                this.hasSauce = true;
+                return this;
+            }
+
+            @Override
+            public ChicagoStylePizza build() {
+                return new ChicagoStylePizza(this);
+            }
+        }
+
+        private ChicagoStylePizza(Builder builder) {
+            super(builder);
+            this.hasSauce = builder.hasSauce;
+        }
+    }
+}
+```
+
+빌더패턴 사용 
+
+```java
+     Pizza newyorkPizza = new Pizza.NYStylePizza.Builder()
+                .size(Pizza.Size.SMALL)
+                .toppings(Arrays.asList("Cheese", "Pepperoni"))
+                .build();
+
+        Pizza chicagoPizza = new Pizza.ChicagoStylePizza.Builder()
+                .hasSauce()
+                .toppings(Arrays.asList("Sausage", "Mushrooms"))
+                .build();
+```
+
+### **빌더패턴 단점아닌 단점**    
+객체를 만들려면 , 그에 앞서 빌더부터 만들어야됨, 빌더 생성비용이 크지는 않지만 성능에 민감한 상황에서 문제가 될 수 있음.    
+또한 점층적 생성자 패턴보다는 코드가 장황해서 매개변수가 4개 이상은 되어야 제값함.   
+하지만 프로그럄이 커질수록 매개변수가 많아지는 경향이 있음, 유연성을 위하여 빌더패턴으로 시작하는게 나을 수 있다.
 
 
 
