@@ -1,8 +1,12 @@
 ---
 title: "EffectiveJava"
-date: 2023-06-02T08:22:06Z
-draft: false
+weight: 2
+# bookFlatSection: false
+# bookToc: true
+# bookHidden: false
 bookCollapseSection: true
+# bookComments: false
+# bookSearchExclude: false
 ---
 
 ![effective 표지](/effectiveJava/effectiveJava.png)

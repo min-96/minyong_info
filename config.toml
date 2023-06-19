@@ -4,7 +4,7 @@ title =  ' minyong.read();'
 theme = 'hugo-book'
 [params]
  # BookTheme = 'dark'
-  BookMenuBundle = '/menu'
+  BookSection = 'docs'
   BookLogo = 'logo.png'
  # BookRepo = 'https://github.com/min-96/minyong_info'
  # BookEditPath = 'edit/master/'

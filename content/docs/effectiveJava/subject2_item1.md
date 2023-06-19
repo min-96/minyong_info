@@ -1,8 +1,12 @@
 ---
 title: "Item1"
-date: 2023-06-02T09:49:45Z
 weight: 1
-draft: false
+# bookFlatSection: false
+# bookToc: true
+# bookHidden: false
+# bookCollapseSection: false
+# bookComments: false
+# bookSearchExclude: false
 ---
 
 # Creating and Destroying Objects Item1
