@@ -86,8 +86,20 @@ public class GenericSingletonFactory {
     }
 }
 ```
-> 하지만 이 두 방법 모두 reflection 공격에 취약함
-reflection 이란? #
+### **메서드 참조를 공급자로 사용** 
+```java
+public class SingletonUser {
+    public static void main(String[] args) {
+        Supplier<Singleton> singletonSupplier = Singleton::getInstance;
+        Singleton singleton = singletonSupplier.get();
+        singleton.someMethod();
+    }
+}
+```
+
+**하지만 이 두 방법 모두 reflection 공격에 취약함**   
+
+### **reflection 이란?** 
 Reflection은 런타임에 클래스, 인터페이스, 메서드 및 변수와 같은 객체를 검사하거나 수정할 수 있게 하는 강력한 기능
 Reflection API를 사용하면 런타임에 클래스의 객체를 만들고, 메서드를 호출하고, 변수의 값을 바꿀 수 있다.
 
