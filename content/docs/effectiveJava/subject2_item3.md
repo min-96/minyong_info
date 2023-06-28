@@ -29,11 +29,22 @@ public class Singleton {
     public static final Singleton INSTANCE = new Singleton();
 
     private Singleton() {
-        // Private constructor prevents instantiation from other classes
+    
     }
 
-    public void someMethod() {
-        // Some class methods...
-    }
 }
 ```
+
+구현이 간결하다는 장점이 있다. 또한, 직렬화와 관련하여 추가 작업이 필요하지 않다.        
+그러나 이 방식은 reflection을 통한 공격에 취약할 수 있다.    
+즉, reflection을 사용하여 private 생성자를 호출하여 싱글턴이 아닌 추가 인스턴스를 생성할 수 있다   
+이 문제는 생성자에서 두 번째 객체 생성을 확인하고 예외를 던짐으로써 완화할 수 있다   
+
+### **reflection 이란?**
+Reflection은 런타임에 클래스, 인터페이스, 메서드 및 변수와 같은 객체를 검사하거나 수정할 수 있게 하는 강력한 기능   
+Reflection API를 사용하면 런타임에 클래스의 객체를 만들고, 메서드를 호출하고, 변수의 값을 바꿀 수 있다.
+
+그러나 Reflection은 그 강력함 때문에 부주의하게 사용될 경우 보안 문제를 초래할 수 있다.   
+private나 protected로 선언된 멤버에 접근할 수 있으므로, 이를 악용하면 싱글턴 패턴과 같이 멤버의 개수나 상태를 통제하려는 디자인 패턴을 깨트리는 것이 가능하다.   
+이러한 가능성을 "Reflection을 통한 공격"이라 부름
+
