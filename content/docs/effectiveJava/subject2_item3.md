@@ -1,5 +1,5 @@
 ---
-title: "Subject2 Item3"
+title: "Item3"
 weight: 3
 # bookFlatSection: false
 # bookToc: true
@@ -8,3 +8,12 @@ weight: 3
 # bookComments: false
 # bookSearchExclude: false
 ---
+# Creating and Destroying Objects Item3
+* * *
+
+## **Item 3 - private 생성자나 열거 타입으로 싱글턴임을 보증**
+
+ㅑ
+
+   
+

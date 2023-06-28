@@ -10,6 +10,7 @@ weight: 2
 ---
 
 # Creating and Destroying Objects Item2
+* * *
 
 ## **Item 2 - 생성자에 매개변수가 많다면 빌더를 고려하라**   
 ### **빌더패턴**       
