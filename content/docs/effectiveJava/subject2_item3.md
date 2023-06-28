@@ -48,3 +48,5 @@ Reflection API를 사용하면 런타임에 클래스의 객체를 만들고, �
 private나 protected로 선언된 멤버에 접근할 수 있으므로, 이를 악용하면 싱글턴 패턴과 같이 멤버의 개수나 상태를 통제하려는 디자인 패턴을 깨트리는 것이 가능하다.   
 이러한 가능성을 "Reflection을 통한 공격"이라 부름
 
+
+### **방법 2 : private 생성자와 함께 static factory method를 제공하는 것** 
