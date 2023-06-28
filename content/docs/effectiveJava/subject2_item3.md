@@ -20,7 +20,7 @@ weight: 3
 > **Item3에서는 싱글턴을 디자인 패턴을 구현하는 두가지 방법 제시**
 
 
-### **방법 1 :  private 생성자와 public static final 필드를 사용하는 것**
+### **방법 1 :  private 생성자와 public static final 필드를 사용**
 static final 필드 INSTANCE를 사용하여 하나의 인스턴스를 만들며,이는 클래스가 로드될 때 한 번만 생성된다   
 생성자는 private로 선언되어 있어서 클래스 외부에서는 new 키워드를 통해 Singleton 클래스의 객체를 만들 수 없다   
  이로 인해 Singleton.INSTANCE를 통해서만 Singleton 클래스의 인스턴스에 접근할 수 있다.
@@ -49,4 +49,21 @@ private나 protected로 선언된 멤버에 접근할 수 있으므로, 이를 �
 이러한 가능성을 "Reflection을 통한 공격"이라 부름
 
 
-### **방법 2 : private 생성자와 함께 static factory method를 제공하는 것** 
+### **방법 2 : private 생성자와 함께 static factory method를 사용**
+이 방식은 publuc static final 필드를 사용하는 방식과 비슷하다   
+*  api를 변경하지 않고도 싱글턴이 아니게 변경할수있다. 팩토리 메서드가 반환하는 인스턴스 종류를 변경하기만 하면됨.   
+* 원하는 경우에만 싱글턴을 만들수있다. 이걸 lazy initialization이라 부름.
+* 재네릭 싱글턴 팩토리로 만들수있음.
+```java
+public class Singleton {
+    private static final Singleton INSTANCE = new Singleton();
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        return INSTANCE;
+    }
+
+}
+```
