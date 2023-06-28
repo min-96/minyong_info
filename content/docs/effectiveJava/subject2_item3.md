@@ -40,30 +40,59 @@ public class Singleton {
 즉, reflection을 사용하여 private 생성자를 호출하여 싱글턴이 아닌 추가 인스턴스를 생성할 수 있다   
 이 문제는 생성자에서 두 번째 객체 생성을 확인하고 예외를 던짐으로써 완화할 수 있다   
 
-### **reflection 이란?**
-Reflection은 런타임에 클래스, 인터페이스, 메서드 및 변수와 같은 객체를 검사하거나 수정할 수 있게 하는 강력한 기능   
-Reflection API를 사용하면 런타임에 클래스의 객체를 만들고, 메서드를 호출하고, 변수의 값을 바꿀 수 있다.
-
-그러나 Reflection은 그 강력함 때문에 부주의하게 사용될 경우 보안 문제를 초래할 수 있다.   
-private나 protected로 선언된 멤버에 접근할 수 있으므로, 이를 악용하면 싱글턴 패턴과 같이 멤버의 개수나 상태를 통제하려는 디자인 패턴을 깨트리는 것이 가능하다.   
-이러한 가능성을 "Reflection을 통한 공격"이라 부름
 
 
 ### **방법 2 : private 생성자와 함께 static factory method를 사용**
+
 이 방식은 publuc static final 필드를 사용하는 방식과 비슷하다   
-*  api를 변경하지 않고도 싱글턴이 아니게 변경할수있다. 팩토리 메서드가 반환하는 인스턴스 종류를 변경하기만 하면됨.   
-* 원하는 경우에만 싱글턴을 만들수있다. 이걸 lazy initialization이라 부름.
-* 재네릭 싱글턴 팩토리로 만들수있음.
 ```java
 public class Singleton {
-    private static final Singleton INSTANCE = new Singleton();
+    private static Singleton INSTANCE = null;
 
-    private Singleton() {
-    }
+    private Singleton() {}
 
+  // lazy initialization
     public static Singleton getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Singleton();
+        }
         return INSTANCE;
     }
 
+    // 이 메서드를 호출하여 싱글턴이 아닌 인스턴스를 반환하도록 변경할 수 있음
+    public static Singleton getNewInstance() {
+        return new Singleton();
+    }
 }
 ```
+*  api를 변경하지 않고도 싱글턴이 아니게 변경할수있다. 팩토리 메서드가 반환하는 인스턴스 종류를 변경하기만 됨.
+* 원하는 경우에만 싱글턴을 만들수있다. 이걸 lazy initialization이라 부름.
+* 제네릭 싱글턴 팩토리로 만들수있음
+* 메서드 참조를 공급자로 사용할수있음
+
+### **제테릭 싱글턴 팩토리**
+```java
+public class GenericSingletonFactory {
+    private static UnmodifiableList<?> INSTANCE = null;
+
+    private GenericSingletonFactory() {}
+
+    @SuppressWarnings("unchecked")
+    public static <T> UnmodifiableList<T> getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new UnmodifiableList<>();
+        }
+        return (UnmodifiableList<T>) INSTANCE;
+    }
+}
+```
+> 하지만 이 두 방법 모두 reflection 공격에 취약함
+reflection 이란? #
+Reflection은 런타임에 클래스, 인터페이스, 메서드 및 변수와 같은 객체를 검사하거나 수정할 수 있게 하는 강력한 기능
+Reflection API를 사용하면 런타임에 클래스의 객체를 만들고, 메서드를 호출하고, 변수의 값을 바꿀 수 있다.
+
+그러나 Reflection은 그 강력함 때문에 부주의하게 사용될 경우 보안 문제를 초래할 수 있다.
+private나 protected로 선언된 멤버에 접근할 수 있으므로, 이를 악용하면 싱글턴 패턴과 같이 멤버의 개수나 상태를 통제하려는 디자인 패턴을 깨트리는 것이 가능하다.
+이러한 가능성을 “Reflection을 통한 공격"이라 부름
+
+
