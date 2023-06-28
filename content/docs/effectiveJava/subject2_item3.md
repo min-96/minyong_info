@@ -8,6 +8,7 @@ weight: 3
 # bookComments: false
 # bookSearchExclude: false
 ---
+
 # Creating and Destroying Objects Item3
 * * *
 
@@ -17,7 +18,7 @@ weight: 3
 인스턴스를 오직 하나만 생성할 수 있는 클래스를 말한다.   
 무상태(stateless)객체나 설계상 유일해야 되는 시스템 컴포넌트   
 
-> **Item3에서는 싱글턴을 디자인 패턴을 구현하는 두가지 방법 제시**
+> **Item3에서는 싱글턴을 디자인 패턴을 구현하는 세가지 방법 제시**
 
 
 ### **방법 1 :  private 생성자와 public static final 필드를 사용**
