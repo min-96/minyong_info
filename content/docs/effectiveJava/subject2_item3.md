@@ -97,7 +97,7 @@ public class SingletonUser {
 }
 ```
 
-**하지만 이 두 방법 모두 reflection 공격에 취약함**   
+### **문제 1 : 하지만 이 두 방법 모두 reflection 공격에 취약함**   
 
 ### **reflection 이란?** 
 Reflection은 런타임에 클래스, 인터페이스, 메서드 및 변수와 같은 객체를 검사하거나 수정할 수 있게 하는 강력한 기능
@@ -107,4 +107,53 @@ Reflection API를 사용하면 런타임에 클래스의 객체를 만들고, �
 private나 protected로 선언된 멤버에 접근할 수 있으므로, 이를 악용하면 싱글턴 패턴과 같이 멤버의 개수나 상태를 통제하려는 디자인 패턴을 깨트리는 것이 가능하다.
 이러한 가능성을 “Reflection을 통한 공격"이라 부름
 
+**reflection을 해결**
+```java
+public class Singleton {
+    public static final Singleton INSTANCE = new Singleton();
+    private Singleton() {
+        if (INSTANCE != null) {
+            throw new IllegalStateException("Already instantiated");
+        }
+    }
+}
+```
+
+### **문제 2 : 직렬화 처리**
+Singleton이 Serializable 인터페이스를 구현한다면, 직렬화와 역직렬화 과정에서 새로운 인스턴스가 생성될수 있다.   
+자바의 직렬화/역직렬화 프로세스는 기본적으로 객체의 상태를 저장하고 복원하는 방법입니다. 역직렬화 과정에서는
+해당 객체의 새로운 인스턴스가 생성된다. 
+```java
+import java.io.*;
+
+public class Singleton implements Serializable {
+    public static final Singleton INSTANCE = new Singleton();
+
+    private Singleton() {
+        // Prevent form the reflection api.
+        if (INSTANCE != null) {
+            throw new IllegalStateException("Already created.");
+        }
+    }
+    
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        // 직렬화
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("singleton.bin"));
+        oos.writeObject(Singleton.INSTANCE);
+        oos.close();
+
+        // 역직렬화
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("singleton.bin"));
+        Singleton singleton2 = (Singleton) ois.readObject();
+        ois.close();
+
+        // 출력 결과 : false
+        System.out.println(Singleton.INSTANCE == singleton2);
+    }
+}
+```
+readObject() 메서드는 싱글턴 객체의 새로운 인스턴스를 생성합니다. 마지막 줄에서 비교하는 == 연산의 결과가 false로 나타나는 이유   
+이것은 싱글턴이라는 원칙, 즉 동일 클래스에 대해 생성되는 인스턴스가 오직 하나임을 보장하는 원칙을 위배하는 것
+
+** 
 
