@@ -9,7 +9,8 @@ weight: 6
 # bookSearchExclude: false
 ---
 
-# Creating and Destroying Objects Item5
+# Creating and Destroying Objects Item5   
+
 * * *
 
 ## **Item 6 - 불필요한 객체 생성을 피하자**

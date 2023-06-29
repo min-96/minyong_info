@@ -10,6 +10,7 @@ weight: 4
 ---
 
 # Creating and Destroying Objects Item4
+
 * * *
 
 ## **Item 4 - 인스턴스화를 막으려거든 private 생성자를 사용**
