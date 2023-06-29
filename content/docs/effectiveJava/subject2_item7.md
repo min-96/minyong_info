@@ -14,9 +14,9 @@ weight: 7
 
 ## **Item 7 - 다 쓴 객체 참조를 해제하자**
 
-> 개발자가 명시적으로 객체 참조를 제거하지 않으면, 가비지 컬렉션이 이루어지지 않을 수 있다   
+> **개발자가 명시적으로 객체 참조를 제거하지 않으면, 가비지 컬렉션이 이루어지지 않을 수 있다   
  이로 인해 메모리 누수(memory leak)가 발생하고, 이는 애플리케이션의 성능 저하를 일으킬수있다.
-이를 방지하기 위해 더 이상 사용하지 않는 객체 참조를 null로 설정하자
+이를 방지하기 위해 더 이상 사용하지 않는 객체 참조를 null로 설정하자**
 
 ## **자기 메모리를 직접 관리하는 클래스에서만 객체 참조를 null로 설정**
 
@@ -75,5 +75,23 @@ public class Stack {
 **약한 참조 (Weak Reference)**   
 – WeakReference<Integer> soft = new WeakReference<Integer>(prime);   와 같이 WeakReference Class를 이용하여 생성이 가능하다.  prime == null 되면 (해당 객체를 가리키는 참조가 WeakReference 뿐일 경우) GC 대상이 된다.  앞서 이야기 한 내용과 같이 SoftReference와 차이점은 메모리가 부족하지 않더라도 GC 대상이 된다는 것이다.    다음 GC가 발생하는 시점에 무조건 없어진다.
 
+```java
+import java.util.Map;
+import java.util.WeakHashMap;
 
+public class CacheManager {
+    private Map<Object, Object> cache = new WeakHashMap<>();
 
+    public void put(Object key, Object value) {
+        cache.put(key, value);
+    }
+
+    public Object get(Object key) {
+        return cache.get(key);
+    }
+}
+
+```
+
+하지만 캐시된 데이터를 장시간에 보관하려면 다른 방법을 사용해야됨   
+ weakHashMap은 장시간 걸친 캐시보다는 짧은 시간 동안만 캐시해야하는 경우나 리스너와 같은 일시적인 참조를 저장하는 용도로 더 적합하다.
