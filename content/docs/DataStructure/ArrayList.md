@@ -32,3 +32,59 @@ weight: 1
 
 * **인덱스 기반 접근**: List는 인덱스를 사용하여 요소에 빠르게 접근할 수 있다.  인덱스를 통해 특정 위치의 요소를 읽거나 수정하는 것이 가능하며, 이는 데이터 검색 및 수정 작업에 효율적이다.
 
+```java
+
+public class ArrayList<E> {
+    private int size;
+    private Object[] elementData;
+
+    private static final int DEFAULT_CAPACITY = 10;
+
+    public ArrayList() {
+        this.size =0;
+        this.elementData = new Object[DEFAULT_CAPACITY];
+    }
+
+    public void add(E ele){
+        if(size == elementData.length){
+            int newArr = elementData.length * 2;
+            elementData = Arrays.copyOf(elementData, newArr);
+        }
+        elementData[size] = ele;
+        size++;
+    }
+
+    public E get(int index){
+        if(index <0 || index >= size){
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }else{
+            return (E)elementData[index];
+        }
+    }
+
+    public void remove(int index){
+        if(index <0 || index > elementData.length){
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
+        for(int i=0; i<size-1; i++){
+            elementData[i] = elementData[i+1];
+        }
+        size--;
+        elementData[size-1] = null;
+    }
+
+    public int size(){
+        return size;
+    }
+
+
+    public boolean contains(E ele){
+        for(int i=0; i<size; i++){
+            if(ele.equals(elementData[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+```
