@@ -138,7 +138,10 @@ public class ArrayList<E> {
         list.removeAll(Arrays.asList(10, 8, 18));
         // 20,6,4,2,6,12,14,16
         list.retainAll(Arrays.asList(20, 6, 4)); // 교집합만 남게됨
-
+   	list.removeIf(i -> i % 2 == 0);  
+	// 조건식에서 만족하는 요소 제거
+        list.clear(); // 모든 요소 제거
+        list.isEmpty(); // 리스트가 비어있는지 확인
 
 	 ListIterator<Integer> iterator = list.listIterator();
         	while (iterator.hasNext()) {
@@ -153,11 +156,22 @@ public class ArrayList<E> {
 	list.toArray(new Integer[0]);
         // 20,6,4,6 -> Integer[] 배열로 변환
 
-
 	Spliterator<Integer> spliterator =list.spliterator();     
 	//리스트의 요소들을 병렬로 처리하기 위한 Spliterator를 반환
         spliterator.forEachRemaining(System.out::println);
 
-
+	list.parallelStream().forEach(System.out::println);
 
 ```
+
+## **spliterator 와 parallelStream 차이점**
+
+
+**둘다 자바의 병렬처리 기능을 지원함**
+
+spliterator는 명시적인 반복 작업을 수행하기 위해 forEachRemaining() 메서드를 사용하거나,   
+반복문을 통해 직접 분할과 순회 작업을 구현해야됨   
+Spliterator는 단일 스레드 환경에서 사용되기도 하지만, 필요에 따라 멀티스레드로 작업을 분할 할 수 도 있음
+
+
+
