@@ -32,7 +32,10 @@ weight: 1
 
 * **인덱스 기반 접근**: List는 인덱스를 사용하여 요소에 빠르게 접근할 수 있다.  인덱스를 통해 특정 위치의 요소를 읽거나 수정하는 것이 가능하며, 이는 데이터 검색 및 수정 작업에 효율적이다.
 
-{{< expand "ArrayList 구현" >}}
+
+## **ArrayList 구현**
+
+{{< expand "ArrayList 구현보기" >}}
 
 ```java
 
@@ -91,3 +94,6 @@ public class ArrayList<E> {
 }
 ```
 {{< /expand >}}
+
+
+
