@@ -164,24 +164,14 @@ public class ArrayList<E> {
 
 	list.parallelStream().forEach(System.out::println);
 
+
+	list.ensureCapacity(20); -> 내부 배열의 용량을 최소한으로 지정된 값으로 저장하는 역할
+	list.trimToSize(); -> 현재 저장된 요소의 개수만큼 용량을 줄임
+
 ```
 
 {{< /expand >}}
 
-## **spliterator 와 parallelStream 차이점**
 
-
-**둘다 자바의 병렬처리 기능을 지원함**
-
-* **Spliterator** : spliterator는 명시적인 반복 작업을 수행하기 위해 forEachRemaining() 메서드를 사용하거나,   
-반복문을 통해 직접 분할과 순회 작업을 구현해야됨   
-Spliterator는 단일 스레드 환경에서 사용되기도 하지만, 필요에 따라 멀티스레드로 작업을 분할 할 수 도 있음
-
-* **parallelStream()** : stream을 병렬처리 할수 있는 스트림으로 변환한다.    
-병렬스트림은 내부적으로 작업의 분할과 스레드를 관리를 자동으로 처리한다.
-
-
-> list.spliterator()는 Spliterator를 반환하여 개발자가 요소의 분할과 순회를 직접 제어할 수 있음   
-list.parallelStream()은 병렬 처리를 지원하는 Stream을 반환하여 요소의 처리를 편리하게 수행하고, 내부적으로 분할과 스레드 관리를 자동으로 처리
 
 
