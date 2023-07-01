@@ -25,5 +25,80 @@ weight: 2
 * **메모리 사용량**: LinkedList는 각 요소마다 이전 요소와 다음 요소에 대한 참조를 유지해야 하므로, 메모리 사용량이 상대적으로 더 많다. 이는 각 요소에 추가적인 참조 필드가 필요하기 때문임
 
 
-
 ![image](/DataStructure/linkedList)
+
+
+## **LinkedList 구현**
+{{< expand "LinkedList 구현보기" >}}
+```java
+public class LinkedList<E> {
+    private Node<E> head;
+    private Node<E> tail;
+    private int size;
+
+    class Node<E> {
+        private E data;
+        private Node<E> next;
+        private Node<E> prev;
+
+        public Node(E data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+    }
+
+    public LinkedList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    public void add(E value){
+        Node<E> newNode = new Node<>(value);
+        if(head == null) {
+            head = newNode;
+        }else {
+            tail.next = newNode;
+            newNode.prev = tail;
+        }
+        tail = newNode;
+        size++;
+
+    }
+
+    public void add(int index, E value){
+        Node<E> newNode = new Node<>(value);
+        Node<E> node = head;
+        for(int i=0; i<index-1; i++){
+            node = node.next;
+        }
+        newNode.next = node.next;
+        node.next.prev = newNode;
+        node.next = newNode;
+        newNode.prev = node;
+        size++;
+    }
+
+    public E get(int index){
+        Node<E> node = head;
+        for(int i=0; i<index; i++){
+            node = node.next;
+        }
+        return node.data;
+    }
+
+    public void remove(int index){
+        Node<E> node = head;
+        for(int i=0; i<index; i++){
+            node = node.next;
+        }
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        size--;
+    }
+
+}
+```
+{{< /expand >}}
+
