@@ -96,4 +96,68 @@ public class ArrayList<E> {
 {{< /expand >}}
 
 
+## **ArrayList 메소드 종류**
+```java
+        List<Integer> list = new ArrayList<>(Arrays.asList(1,3,2,4,3));
 
+        list.remove(1);
+        // 1,2,4,3
+        list.size();
+        // 4
+        list.contains(3);
+        // true
+        list.get(1);
+        // 2
+        list.add(1, 3);
+        // 1,3,2,4,3  -> 인덱스가 뒤로 밀리게 됨
+        list.set(1, 5);
+        // 1,5,2,4,3 // 인덱스에 있는 요소가 대체됨
+        list.sort((o1, o2) -> o1 - o2);
+        // 1,2,3,4,5
+        list.sort((o1, o2) -> o2 - o1);
+        // 5,4,3,2,1
+        list.indexOf(5);
+        // 0
+        list.add(3);
+        // 5,4,3,2,1,3
+        list.lastIndexOf(3);
+        // 5
+        list.addAll(Arrays.asList(6,7,8));
+        // 5,4,3,2,1,3,6,7,8
+        list.addAll(2, Arrays.asList(9,10));
+        // 5,4,9,10,3,2,1,3,6,7,8
+       // list.stream().forEach(System.out::println);
+        list.containsAll(Arrays.asList(1,2,3));
+        // true
+        list.equals(Arrays.asList(5,4,9,10,3,2,1,3,6,7,8));
+        // true
+        list.subList(2, 5);
+        // 9,10,3
+        list.replaceAll(e -> e * 2);
+        // 10,8,18,20,6,4,2,6,12,14,16
+        list.removeAll(Arrays.asList(10, 8, 18));
+        // 20,6,4,2,6,12,14,16
+        list.retainAll(Arrays.asList(20, 6, 4)); // 교집합만 남게됨
+
+
+	 ListIterator<Integer> iterator = list.listIterator();
+        	while (iterator.hasNext()) {
+            	int element = iterator.next();
+            // 20,6,4,6
+        } 
+        // ==
+        iterator.forEachRemaining(System.out::println);
+        // 20,6,4,6
+
+
+	list.toArray(new Integer[0]);
+        // 20,6,4,6 -> Integer[] 배열로 변환
+
+
+	Spliterator<Integer> spliterator =list.spliterator();     
+	//리스트의 요소들을 병렬로 처리하기 위한 Spliterator를 반환
+        spliterator.forEachRemaining(System.out::println);
+
+
+
+```
