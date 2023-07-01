@@ -163,7 +163,15 @@ public class ArrayList<E> {
         spliterator.forEachRemaining(System.out::println);
 
 	list.parallelStream().forEach(System.out::println);
+	// 병렬스트림을 생성하여 멀티스레드로 처리.
 
+
+	list.stream().parallel().forEach(System.out::println);
+	//스플리터 대신 스트림 API의 parallel() 메서드를 사용하여 요소를 병렬 처리하는 것이 더 효과적이고 권장되는 방법
+
+
+	list.parallelStream().forEachOrdered(Syste,.out::pringln);;
+	// 요소의 순서를 보장
 
 	list.ensureCapacity(20); -> 내부 배열의 용량을 최소한으로 지정된 값으로 저장하는 역할
 	list.trimToSize(); -> 현재 저장된 요소의 개수만큼 용량을 줄임
@@ -171,6 +179,13 @@ public class ArrayList<E> {
 ```
 
 {{< /expand >}}
+
+
+## **iterator vs spliterator**
+
+* **list.iterator()** : Iterator 객체를 반환한다  이터레이터는 자바의 기본 인터페이스로, 컬렉션의 요소를 순회하는 기능을 제공,  이터레이터는 순차적인 단방향 순회만 가능하다.
+
+* **list.spliterator()**: Spliterator 객체를 반환한다  스플리터는 자바 8에서 추가된 인터페이스로, 요소를 분할하고 순회하는 기능을 제공,  스플리터는 병렬 처리를 지원하며, 스트림(Stream)에서 사용될 수 있다.
 
 
 
