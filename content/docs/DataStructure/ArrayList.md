@@ -95,8 +95,10 @@ public class ArrayList<E> {
 ```
 {{< /expand >}}
 
-
 ## **ArrayList 메소드 종류**
+
+{{< expand "ArrayList 메소드" >}}
+
 ```java
         List<Integer> list = new ArrayList<>(Arrays.asList(1,3,2,4,3));
 
@@ -163,6 +165,8 @@ public class ArrayList<E> {
 	list.parallelStream().forEach(System.out::println);
 
 ```
+
+{{< /expand >}}
 
 ## **spliterator 와 parallelStream 차이점**
 
