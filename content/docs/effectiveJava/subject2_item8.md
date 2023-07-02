@@ -50,30 +50,26 @@ finalizer보다 안전한것은 객체가 더이상 접근되지 않을때 적�
 
 ## **finalizer() vs cleaner()**
 
- **실행시점**
+### **실행시점**
+> **Finalizer**: Finalizer 메서드는 가비지 컬렉션 시스템에 의해 객체가 수집되기 직전에 호출되어 호출시점을 정확하게 예측하기 어려움 
 <br>
-Finalizer: Finalizer 메서드는 가비지 컬렉션 시스템에 의해 객체가 수집되기 직전에 호출되어 호출시점을 정확하게 예측하기 어려움 
-<br>
-Cleaner: Cleaner는 명시적으로 등록된 정리 작업이 필요한 객체에 대해 사용자가 직접 정의한 시점에 실행될 수 있도록 제어할 수 있음, 일반적으로 객체가 더 이상 접근되지 않을 때 실행된다
-<br>
-
- **사용방법**
-<br>
-Finalizer: Finalizer 메서드는 객체의 클래스 내에 선언되어야 한다. JVM은 객체의 finalizer 메서드를 호출하여 객체의 자원을 정리
-<br>
-Cleaner: java.lang.ref.Cleaner 클래스를 사용하여 객체에 대한 정리 작업을 등록. 객체와 관련된 정리 작업을 수행하는 Runnable 객체를 Cleaner에 등록하고, Cleaner가 관리하는 스레드에서 실행
+**Cleaner**: Cleaner는 명시적으로 등록된 정리 작업이 필요한 객체에 대해 사용자가 직접 정의한 시점에 실행될 수 있도록 제어할 수 있음, 일반적으로 객체가 더 이상 접근되지 않을 때 실행된다
 <br>
 
- **예외처리**
+### **사용방법**
+> **Finalizer**: Finalizer 메서드는 객체의 클래스 내에 선언되어야 한다. JVM은 객체의 finalizer 메서드를 호출하여 객체의 자원을 정리
 <br>
-Finalizer: Finalizer 메서드 내에서 발생하는 예외는 무시된다  예외를 처리하거나 전파할 수 있는 방법이 제한적.
-<br>
-Cleaner: Cleaner는 Runnable 객체를 등록하고, 해당 객체가 실행될 때 발생하는 예외를 정상적인 방법으로 처리할 수 있다
+**Cleaner**: java.lang.ref.Cleaner 클래스를 사용하여 객체에 대한 정리 작업을 등록. 객체와 관련된 정리 작업을 수행하는 Runnable 객체를 Cleaner에 등록하고, Cleaner가 관리하는 스레드에서 실행
 <br>
 
- **성능**
+### **예외처리**
+> **Finalizer**: Finalizer 메서드 내에서 발생하는 예외는 무시된다  예외를 처리하거나 전파할 수 있는 방법이 제한적.
 <br>
-Finalizer: Finalizer 메서드는 가비지 컬렉션의 수행 속도를 저하시킬 수 있음, 가비지 컬렉션 시스템은 finalizer 메서드의 실행을 위해 객체를 더 오랫동안 유지해야함
+**Cleaner**: Cleaner는 Runnable 객체를 등록하고, 해당 객체가 실행될 때 발생하는 예외를 정상적인 방법으로 처리할 수 있다
 <br>
-Cleaner: Cleaner는 finalizer 메서드보다 더 예측 가능하고 성능이 좋다 , Cleaner는 객체의 명시적인 종료 메서드를 호출하여 자원을 정리할 수 있다.
+
+### **성능**
+> **Finalizer**: Finalizer 메서드는 가비지 컬렉션의 수행 속도를 저하시킬 수 있음, 가비지 컬렉션 시스템은 finalizer 메서드의 실행을 위해 객체를 더 오랫동안 유지해야함
+<br>
+**Cleaner**: Cleaner는 finalizer 메서드보다 더 예측 가능하고 성능이 좋다 , Cleaner는 객체의 명시적인 종료 메서드를 호출하여 자원을 정리할 수 있다.
  
