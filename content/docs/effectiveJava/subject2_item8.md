@@ -34,6 +34,43 @@ protected void finalize() throws Throwable {
 
 
 ## **cleaner 메소드**
+```java
+import java.lang.ref.Cleaner;
+
+public class Person implements AutoCloseable {
+    private final Cleaner cleaner = Cleaner.create();
+
+    private static class Resource implements Runnable {
+        // Person 객체의 자원을 해제하는 로직을 구현합니다.
+        @Override
+        public void run() {
+            System.out.println("Cleaning up Person resources");
+            // 자원 해제 로직을 작성합니다.
+        }
+    }
+
+    private final Cleaner.Cleanable cleanable;
+
+    public Person() {
+        Resource resource = new Resource();
+        cleanable = cleaner.register(this, resource);
+    }
+
+    // AutoCloseable 인터페이스를 구현하여 자원을 해제하는 close() 메서드를 재정의합니다.
+    @Override
+    public void close() {
+        cleanable.clean();
+    }
+
+    public static void main(String[] args) {
+        try (Person person = new Person()) {
+            // Person 객체 사용
+        }
+    }
+}
+```
+
+
 
 finalizer메소드를 대체하기 위한 목적으로 제공된 cleaner메소드   
 
