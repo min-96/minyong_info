@@ -99,6 +99,34 @@ public void processResource() {
 try-with-resources 는 try 블록에 자원을 할당하면, 해당 자원이 사용이 끝나면 자동으로 해제됨   
 자원 클래스는 AutoCloseable 인터페이스를 구현해야됨 AutoCloseable 인터페이스에는 close() 메서드가 정의되어 있으므로 자원해제 작업을 수행함
 
+```java
+public void processFile(String fileName) {
+    try (FileInputStream fileInputStream = new FileInputStream(fileName)) {
+        // 파일 처리 로직
+        // ...
+    } catch (IOException e) {
+        // 예외 처리
+        // ...
+    }
+}
+```
+**try-finally보다 더욱 간결하고 가독성이 좋아짐** 여러개의 자원을 처리할때도 한번에 처리할수있음 예외가 발생하면 가장 마지막에 할당된 자원부터 역순으로 close()메서드가 호출되기 때문에 자원의 해제 순서에 대해서도 신경쓸 필요가 없음
+
+
+## **AutoCloseable의 인터페이를 구현한 일부 클래스들**
+
+* FileInputStream 및 FileOutputStream: 파일 입출력을 위한 클래스로, 파일을 자동으로 닫을 수 있다.
+
+* Socket 및 ServerSocket: 네트워크 통신을 위한 클래스로, 소켓 연결을 자동으로 닫을 수 있다.
+
+* Connection, Statement, ResultSet 등 JDBC 관련 클래스: 데이터베이스 연결 및 쿼리 실행을 위한 클래스들로, 자원을 자동으로 해제할 수 있다.
+
+* BufferedReader 및 BufferedWriter: 버퍼링된 입출력을 제공하는 클래스로, 자원을 자동으로 닫을 수 있다.
+
+* ZipInputStream 및 ZipOutputStream: 압축 파일 입출력을 위한 클래스로, 압축 파일을 자동으로 닫을 수 있다.
+
+* Scanner: 입력 스트림을 파싱하기 위한 클래스로, 자원을 자동으로 해제할 수 있다.
+
 
 
 
