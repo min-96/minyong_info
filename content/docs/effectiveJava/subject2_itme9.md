@@ -93,3 +93,12 @@ public void processResource() {
     }
 }
 ```
+
+## **try-with-resorces 사용**
+
+try-with-resources 는 try 블록에 자원을 할당하면, 해당 자원이 사용이 끝나면 자동으로 해제됨   
+자원 클래스는 AutoCloseable 인터페이스를 구현해야됨 AutoCloseable 인터페이스에는 close() 메서드가 정의되어 있으므로 자원해제 작업을 수행함
+
+
+
+
