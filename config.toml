@@ -2,6 +2,8 @@ baseURL = 'http://example.org/'
 languageCode = 'en-us'
 title =  'minyong.write();'
 theme = 'hugo-book'
+defaultContentLanguage = "ko"
+
 [params]
  # BookTheme = 'dark'
   BookSection = 'docs'
