@@ -20,6 +20,13 @@ weight: 10
 ### **equals 메소드란 ?**
 사용자가 입력한 두 문자열이 동일한지 확인하거나, 두 객체가 같은 데이터를 나타내는지 비교할 때 equals() 메서드를 사용한다
 
+## **equals()메서드를 재정의가 필요없는 경우**
+
+
+
+
+
+
 ## **equal()를 재정의해야 하는 경우**
 
 ### **객체의 논리적 동등성 비교가 필요한 경우**
@@ -104,5 +111,24 @@ equals() 메서드는 객체의 상태에 영향을 받지 않고 항상 일관�
 x.equals(null)은 항상 false를 반환해야 한다.  즉, null과는 동등하지 않은 객체는 equals() 메서드를 통해 확인해야 한다.   
 null은 유효한 객체가 아니므로 null과 동등한 객체는 존재하지 않는다.
 
+## **올바른 eqauls()작성법**
 
+```java
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        MyClass myObj = (MyClass) obj;
+        return id == myObj.id && Objects.equals(name, myObj.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+```
