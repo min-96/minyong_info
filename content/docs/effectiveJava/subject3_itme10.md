@@ -26,7 +26,6 @@ weight: 10
 
 객체의 논리적 동등성 비교가 필요한 경우는 주로 객체의 내부 상태나 속성이 같은지를 기준으로 판단해야할때이다.
 
- **사용자 정보비교**    
 ```java 
 public class User {
     private String name;
@@ -50,4 +49,27 @@ public class User {
 ```
 
 User객체가 이름과 이메일이 모두 동일한 경우에만 논리적으로 동등된다고 판단되어 equals메소드로 재정의해야된다.    
+
+### **클래스의 동등성 비교를 지원해야하는 경우**
+
+클래스가 컬렉션에 저장되거나 검색되는 등의 동작을 수행하는 경우, 객체의 동등성 비교를 지원하기 위해 equals() 메서드를 재정의해야한다.HashSet, HashMap과 같은 컬렉션 클래스는 객체의 중복을 확인하거나, 특정 객체를 검색할 때 equals() 메서드를 사용한다.   
+
+위에서 사용한 코드를 재사용해 HashSet에 저장하고 중복을 확인해보자
+```java 
+public class Main {
+    public static void main(String[] args) {
+        User user1 = new User("Alice", 25);
+        User user2 = new User("Bob", 30);
+        User user3 = new User("Alice", 25);
+
+        Set<User> hashSet = new HashSet<>();
+        hashSet.add(user1);
+        hashSet.add(user2);
+        hashSet.add(user3);
+
+        System.out.println(hashSet.size());  // 출력 결과: 2
+    }
+}
+``` 
+equals() 메서드의 재정의를 통해 동일한 내부 상태를 가지는 User 객체를 동등하다고 판단하였기 때문에, 컬렉션 클래스에서 객체의 동등성 비교를 정확하게 수행할 수 있다.
 
